@@ -53,3 +53,20 @@ document.getElementById('editTaskForm').addEventListener('submit', function(even
 });
 
 
+let columnToRename = '';
+
+function openRenameModal(columnId) {
+    columnToRename = columnId; // Almacenar la columna que se va a renombrar
+    const modal = new bootstrap.Modal(document.getElementById('renameColumnModal'));
+    modal.show();
+}
+
+document.getElementById('confirmRenameButton').addEventListener('click', function() {
+    const newColumnName = document.getElementById('newColumnName').value;
+    const columnElement = document.getElementById(columnToRename);
+    if (columnElement && newColumnName) {
+        columnElement.querySelector('h5').childNodes[0].nodeValue = newColumnName; // Cambiar el nombre de la columna
+    }
+    const modal = bootstrap.Modal.getInstance(document.getElementById('renameColumnModal'));
+    modal.hide();
+});
